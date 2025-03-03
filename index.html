@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textilate - Textile Waste Management</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-blue: #203E6C;
+            --light-blue: #A6D1E6;
+            --medium-blue: #5690A6;
+            --dark-blue: #2E5266;
+            --accent-yellow: #FFD966;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .logo span {
+            color: var(--accent-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Button styles */
+.btn {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make anchor behave like a button */
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-signup {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-signup:hover {
+    background-color: #2F4EC3;
+}
+
+/* Hero button specific styles */
+.btn-large {
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(59, 93, 231, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #2F4EC3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 93, 231, 0.4);
+}
+        
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Wave Elements */
+        .wave-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .wave-top {
+            position: absolute;
+        
+            right: -300px;
+            width: 800px;
+            height: 800px;
+            background-color: #E8EFFF;
+            background: linear-gradient(135deg, #95e6f177, #315e739a);
+            border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+            z-index: 0.5;
+        }
+
+        .wave-bottom {
+            position: absolute;
+            bottom: -400px;
+            left: -300px;
+            width: 800px;
+            height: 800px;
+            background: linear-gradient(135deg, #95e6f188, #315e73b2);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 120px 0;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-large {
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(59, 93, 231, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2F4EC3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 93, 231, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(59, 93, 231, 0.1);
+            transform: translateY(-2px);
+        }
+
+       
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-yellow);
+            border-radius: 2px;
+        }
+
+        /* Cards and Grid Layouts */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Marketplace Section */
+        .marketplace {
+            background-color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            background-color: #EEF3FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 18px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-blue);
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            background-color: var(--primary-blue);
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .product-description {
+            margin: 15px 0;
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+
+        .view-more {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Pickup Section */
+        .pickup {
+            background-color: #F8FBFF;
+            position: relative;
+        }
+
+        .pickup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pickup-text {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .pickup-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--dark-blue);
+        }
+
+        .pickup-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .pickup-card h3 {
+            font-size: 24px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 93, 231, 0.1);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            font-weight: 600;
+            padding: 12px 30px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-submit:hover {
+            background-color: #2F4EC3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 93, 231, 0.2);
+        }
+
+        /* Partners Section */
+        .partners {
+            background-color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .partners-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .partner-card {
+            background-color: #F8FBFF;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 200px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: scale(1.05);
+        }
+
+        .partner-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        /* Process Section */
+        .process {
+            background-color: #F0F6FF;
+            color: var(--dark-gray);
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .process-step {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 40px 30px 30px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            border: 3px solid var(--white);
+        }
+
+        .step-icon {
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            color: var(--dark-gray);
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 60px 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent-yellow);
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--white);
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .auth-buttons {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .process-steps, .partners-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 10px 0;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(59, 93, 231, 0.1);
+        }
+
+        .mobile-nav a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav .mobile-auth {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .mobile-auth button {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><img height="50px" width="200px" src="/images/samadhaan nmims.png"> </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="marketplace.html">Thrift Store</a>
+                    <a href="pickup.html">Schedule Pickup</a>
+                    <a href="partners.html">Our Partners</a>
+                    <a href="process.html">Our Process</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-login">Log in</a>
+                    <a href="signup.html" class="btn btn-signup">Sign in</a>
+                </div>
+                <div class="mobile-menu" id="mobileMenuBtn">☰</div>
+            </nav>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="marketplace.html">Thrift Store</a>
+            <a href="pickup.html">Schedule Pickup</a>
+            <a href="partners.html">Our Partners</a>
+            <a href="process.html">Our Process</a>
+            <div class="mobile-auth">
+                <a href="login.html" class="btn btn-login">Log in</a>
+                <a href="signup.html" class="btn btn-signup">Sign in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="wave-container">
+            <div class="wave-top"></div>
+            <div class="wave-bottom"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Throw away your <span>difficulties.</span></h1>
+                    <p>Join us in reducing textile waste. Give your old clothes a new life and shop quality second-hand garments.</p>
+                    <div class="hero-buttons">
+                        <a href="/marketplace.html" class="btn btn-large btn-primary">Shop Secondhand</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- This would be your main illustration/image -->
+                    <div style="width: 400px; height:200px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <img width="1000px" src="/images/b64fd769f86f84ea267822f573b48542.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section class="marketplace" id="marketplace">
+        <div class="container">
+            <h2 class="section-title">Thrift Marketplace</h2>
+            <div class="products-container">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-img"><img width="200px" src="/images/OIP.jpg"> </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Vintage Denim Jacket</h3>
+                        <span class="product-price">₹600.00</span>
+                        <p class="product-description">Classic denim jacket in excellent condition. Size M.</p>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-img"><img width="200px" height="200px" src="/images/OIP (2).jpg"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cotton Summer Dress</h3>
+                        <span class="product-price">₹300.00</span>
+                        <p class="product-description">Floral pattern, perfect for summer. Size S.</p>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-img"><img width="200px" height="200px" src="/images/OIP (3).jpg"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Wool Sweater</h3>
+                        <span class="product-price">₹200.00</span>
+                        <p class="product-description">Warm wool sweater for winter. Size L.</p>
+                    </div>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <div class="product-img"><img width="200px" src="/images/OIP (4).jpg"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Leather Boots</h3>
+                        <span class="product-price">₹2300.00</span>
+                        <p class="product-description">Genuine leather boots, barely worn. Size 9.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more">
+                <a href="marketplace.html" class="btn btn-primary" >View More Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pickup Section -->
+    <section class="pickup" id="pickup">
+        <div class="wave-container">
+            <div class="wave-top"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Schedule a Pickup</h2>
+            <div class="pickup-content">
+                <div class="pickup-text">
+                    <p>Got clothes you no longer need? Schedule a pickup and we'll collect them from your doorstep, giving them a new purpose while reducing textile waste.</p>
+                </div>
+                <div class="pickup-card">
+                    <h3>Request Pickup Form</h3>
+                    <form id="pickupForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickupDate">Preferred Pickup Date</label>
+                            <input type="date" id="pickupDate" name="pickupDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDescription">Description of Items</label>
+                            <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Please describe the items and approximate quantity" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Schedule Pickup</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <h2 class="section-title">Our Partners</h2>
+            <div class="partners-container">
+                <!-- Partner 1 -->
+                <div class="partner-card">
+                    <div class="partner-logo"><img width="200px" src="/images/th.jpg"> </div>
+                </div>
+                <!-- Partner 2 -->
+                <div class="partner-card">
+                    <div class="partner-logo"><img width="200px" src="/images/th (3).jpg"></div>
+                </div>
+                <!-- Partner 3 -->
+                <div class="partner-card">
+                    <div class="partner-logo"><img width="200px" src="/images/th (4).jpg"></div>
+                </div>
+                <!-- Partner 4 -->
+                <div class="partner-card">
+                    <div class="partner-logo"><img width="200px" src="/images/th (2).jpg"></div>
+                </div>
+                <!-- Partner 5 -->
+                <div class="partner-card">
+                    <div class="partner-logo"><img width="200px" src="/images/th (1).jpg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="wave-container">
+            <div class="wave-bottom"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Our Process</h2>
+            <div class="process-steps">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📦</div>
+                    <h3 class="step-title"> Textile Waste Sourcing</h3>
+                    <p class="step-description">We collect non-useable fabrics from consumers, industries, municipal waste, and corporate partners to ensure a continuous supply for recycling.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🔍</div>
+                    <h3 class="step-title">Textile Sorting Technology</h3>
+                    <p class="step-description">We use FTIR, Raman Spectroscopy, soft robotics, and electrostatic sorting for precise fiber separation, ensuring efficient and real-time waste tracking.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🧵</div>
+                    <h3 class="step-title">Innovative Recycling & Processing Methods</h3>
+                    <p class="step-description">We employ cutting-edge mechanical and chemical recycling techniques, including enzymatic hydrolysis and solvent dissolution, to maximize fabric reuse.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">♻️</div>
+                    <h3 class="step-title">Sustainable Profitability & Policy Advocacy</h3>
+                    <p class="step-description">We generate revenue through material resale, thrift initiatives, and data analytics while securing government support for sustainable textile recycling policies.</p>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Textilate</h3>
+                    <p>Sustainable textile waste management solutions for a cleaner, greener future.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="marketplace.html">Thrift Store</a>
+                        <a href="pickup.html">Schedule Pickup</a>
+                        <a href="partners.html">Our Partners</a>
+                        <a href="process.html">

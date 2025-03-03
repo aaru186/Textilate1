@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEXTilATE - Shopping Cart</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #003652;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .dot {
+            color: #e8a87c;
+            font-size: 24px;
+            margin-left: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .login-btn {
+            padding: 10px 20px;
+            border: 1px solid #1a2e44;
+            border-radius: 4px;
+            background: transparent;
+            color: #1a2e44;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background: #1a2e44;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .main-content {
+            padding: 40px 8%;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .cart-section {
+            flex: 2;
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .summary-section {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            height: fit-content;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .cart-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+        
+        .item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        .item-details {
+            flex: 1;
+            padding: 0 20px;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .item-meta {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .item-price {
+            font-weight: bold;
+            color: #1a2e44;
+        }
+        
+        .item-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 20px;
+        }
+        
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .quantity {
+            font-weight: 500;
+        }
+        
+        .remove-btn {
+            color: #d9534f;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .summary-label {
+            color: #777;
+        }
+        
+        .summary-value {
+            font-weight: 500;
+        }
+        
+        .summary-total {
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #1a2e44;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .checkout-btn:hover {
+            background: #15253a;
+        }
+        
+        .delivery-options {
+            margin-top: 25px;
+        }
+        
+        .delivery-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .delivery-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .empty-cart-box {
+            margin-top: 20px;
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+        
+        .empty-cart-message {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #777;
+        }
+        
+        .continue-shopping {
+            padding: 10px 20px;
+            background: #1a2e44;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo"><img height="50px" width="200px" src="/images/samadhaan nmims.png"></a></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Thrift Store</a>
+            <a href="#">Schedule Pickup</a>
+            <a href="#">Our Partners</a>
+            <a href="#">Our Process</a>
+        </div>
+    </nav>
+    
+    <div class="main-content">
+        <div class="cart-section">
+            <h2 class="cart-title">Your Cart (3 items)</h2>
+            
+            <div class="cart-item">
+                <img src="/images/OIP.jpg" alt="Vintage Denim Jacket" class="item-image">
+                <div class="item-details">
+                    <div class="item-title">Vintage Denim Jacket</div>
+                    <div class="item-meta">Size: M | Age: ~2 years</div>
+                    <div class="item-price">₹600.00</div>
+                </div>
+                <div class="item-actions">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+            
+            <div class="cart-item">
+                <img src="/images/th (5).jpg" alt="Wool Cardigan" class="item-image">
+                <div class="item-details">
+                    <div class="item-title">Merino Wool Cardigan</div>
+                    <div class="item-meta">Size: L | Age: ~1 year</div>
+                    <div class="item-price">₹450.00</div>
+                </div>
+                <div class="item-actions">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+            
+            <div class="cart-item">
+                <img src="/images/OIP (6).jpg" alt="Leather Boots" class="item-image">
+                <div class="item-details">
+                    <div class="item-title">Chelsea Jersey</div>
+                    <div class="item-meta">Size: 9 | Age: ~2 years</div>
+                    <div class="item-price">₹300.00</div>
+                </div>
+                <div class="item-actions">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+            
+            <div class="empty-cart-box">
+                <div class="empty-cart-message">Your cart is empty</div>
+                <a href="#" class="continue-shopping">Continue Shopping</a>
+            </div>
+        </div>
+        
+        <div class="summary-section">
+            <h3 class="summary-title">Order Summary</h3>
+            
+            <div class="summary-row">
+                <span class="summary-label">Subtotal</span>
+                <span class="summary-value">₹1350.00</span>
+            </div>
+            
+            <div class="summary-row">
+                <span class="summary-label">Shipping</span>
+                <span class="summary-value">₹35.00</span>
+            </div>
+            
+            <div class="summary-row">
+                <span class="summary-label">Tax</span>
+                <span class="summary-value"></span>
+            </div>
+            
+            <div class="summary-total">
+                <span>Total</span>
+                <span>₹1385.00</span>
+            </div>
+            
+            <button class="checkout-btn">Proceed to Checkout</button>
+            
+            <div class="delivery-options">
+                <h4 class="delivery-title">Delivery Options</h4>
+                
+                <div class="delivery-option">
+                    <input type="radio" id="standard" name="delivery" checked>
+                    <label for="standard">Standard (3-5 business days) - 35.00</label>
+                </div>
+                
+                <div class="delivery-option">
+                    <input type="radio" id="express" name="delivery">
+                    <label for="express">Express (1-2 business days) - 45.00</label>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
